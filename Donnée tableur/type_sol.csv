@@ -1,0 +1,21 @@
+soil_id,soil_name,texture_class,sand_pct,silt_pct,clay_pct,pH,organic_matter_pct,water_holding_capacity,drainage,irrigation_frequency
+1,Sol sableux,Sable,80,10,10,6.1,2.4,74,Modéré,Fréquente
+2,Sol limoneux,Limon,40,40,20,6.8999999999999995,4.0,63,Rapide,Fréquente
+3,Sol argileux,Argile,20,30,50,8.1,3.3,56,Lent,Modérée
+4,Sol calcaire,Calcaire,30,30,40,8.1,1.8000000000000003,64,Modéré,Modérée
+5,Sol humifère,Humus,35,35,30,6.7,2.9000000000000004,25,Modéré,Modérée
+6,Sol volcanique,Volcanique,45,25,30,7.0,1.5999999999999999,55,Modéré,Fréquente
+7,Sol alluvial,Alluvial,50,30,20,7.0,4.3,73,Modéré,Faible
+8,Sol tourbeux,Tourbe,25,35,40,8.0,1.9,44,Lent,Modérée
+9,Sol siliceux,Silice,60,25,15,5.8999999999999995,2.6999999999999997,45,Rapide,Fréquente
+10,Sol marneux,Marne,30,40,30,5.8,3.4,38,Rapide,Fréquente
+11,Sol caillouteux,Cailloux,55,25,20,7.1,3.0999999999999996,27,Lent,Modérée
+12,Sol forestier,Forestier,40,35,25,6.5,2.1999999999999997,63,Modéré,Fréquente
+13,Sol méditerranéen,Méditerranéen,50,30,20,7.2,2.0999999999999996,35,Rapide,Modérée
+14,Sol montagnard,Montagnard,45,35,20,8.1,1.2,40,Rapide,Modérée
+15,Sol loameux,Loam,40,40,20,5.7,3.3000000000000003,59,Rapide,Faible
+16,Sol sablo-limoneux,Sablo-limon,60,25,15,6.6,4.2,49,Rapide,Modérée
+17,Sol argilo-limoneux,Argilo-limon,30,45,25,5.8,4.2,60,Rapide,Faible
+18,Sol argilo-sableux,Argilo-sable,35,25,40,6.1,4.9,72,Modéré,Modérée
+19,Sol riche organique,Organique,30,30,40,5.5,3.2,46,Lent,Fréquente
+20,Sol drainant,Drainant,65,20,15,6.3,3.3,40,Rapide,Fréquente

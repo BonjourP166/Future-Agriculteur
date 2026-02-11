@@ -1,0 +1,101 @@
+id_culture,nom_culture,type
+1,Tomate,Légume
+2,Carotte,Légume
+3,Pomme de terre,Légume
+4,Oignon,Légume
+5,Ail,Légume
+6,Poireau,Légume
+7,Courgette,Légume
+8,Aubergine,Légume
+9,Poivron,Légume
+10,Concombre,Légume
+11,Radis,Légume
+12,Navet,Légume
+13,Betterave,Légume
+14,Chou-fleur,Légume
+15,Brocoli,Légume
+16,Chou rouge,Légume
+17,Chou vert,Légume
+18,Chou de Bruxelles,Légume
+19,Épinard,Légume
+20,Laitue,Légume
+21,Mâche,Légume
+22,Roquette,Légume
+23,Fenouil,Légume
+24,Céleri,Légume
+25,Céleri-rave,Légume
+26,Haricot vert,Légume
+27,Petit pois,Légume
+28,Fève,Légume
+29,Lentille,Légume
+30,Pois chiche,Légume
+31,Maïs doux,Légume
+32,Courge,Légume
+33,Potiron,Légume
+34,Butternut,Légume
+35,Artichaut,Légume
+36,Asperge,Légume
+37,Endive,Légume
+38,Blettes,Légume
+39,Topinambour,Légume
+40,Panais,Légume
+41,Patate douce,Légume
+42,Rutabaga,Légume
+43,Cresson,Légume
+44,Oseille,Légume
+45,Persil,Légume
+46,Basilic,Légume
+47,Thym,Légume
+48,Romarin,Légume
+49,Coriandre,Légume
+50,Menthe,Légume
+51,Chou kale,Légume
+52,Chou chinois,Légume
+53,Chou romanesco,Légume
+54,Courge spaghetti,Légume
+55,Gombo,Légume
+56,Piment,Légume
+57,Échalote,Légume
+58,Ciboulette,Légume
+59,Aneth,Légume
+60,Laurier,Légume
+61,Champignon de Paris,Légume
+62,Pleurote,Légume
+63,Girolle,Légume
+64,Morille,Légume
+65,Truffe,Légume
+66,Salsifis,Légume
+67,Cardon,Légume
+68,Pois gourmand,Légume
+69,Chou-rave,Légume
+70,Pak choï,Légume
+71,Pomme,Fruit
+72,Poire,Fruit
+73,Abricot,Fruit
+74,Pêche,Fruit
+75,Nectarine,Fruit
+76,Prune,Fruit
+77,Cerise,Fruit
+78,Fraise,Fruit
+79,Framboise,Fruit
+80,Mûre,Fruit
+81,Cassis,Fruit
+82,Groseille,Fruit
+83,Kiwi,Fruit
+84,Raisin,Fruit
+85,Melon,Fruit
+86,Pastèque,Fruit
+87,Citron,Fruit
+88,Orange,Fruit
+89,Clémentine,Fruit
+90,Mandarine,Fruit
+91,Figue,Fruit
+92,Grenade,Fruit
+93,Mirabelle,Fruit
+94,Quetsche,Fruit
+95,Noisette,Fruit
+96,Noix,Fruit
+97,Amande,Fruit
+98,Châtaigne,Fruit
+99,Coing,Fruit
+100,Litchi,Fruit
