@@ -1,0 +1,101 @@
+/* ============================================================
+   DESIGN DU FOOTER - PROJET MIASHS (3 COLONNES ÉGALES)
+============================================================ */
+
+footer {
+    background-color: #2c3e50; /* Bleu nuit sérieux */
+    color: #ecf0f1;
+    padding: 60px 0 40px 0;
+    margin-top: 30px;
+    border-top: 4px solid #27ae60; /* Rappel visuel de la thématique agricole */
+    font-family: 'Inter', sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    
+    /* GRILLE : 3 colonnes de largeur identique (1fr chacune) */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 40px;
+    
+    /* Alignement vertical au cas où une colonne est plus haute que l'autre */
+    align-items: start; 
+}
+
+/* CENTRAGE DU CONTENU DE CHAQUE COLONNE */
+.footer-left, 
+.footer-center, 
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Centre les éléments horizontalement (icônes, titres) */
+    text-align: center;     /* Centre le texte */
+}
+
+/* TITRES DES COLONNES */
+footer h4 {
+    color: #27ae60; /* Vert pour l'identité visuelle */
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+}
+
+/* LISTES DE NAVIGATION */
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li {
+    margin-bottom: 12px;
+}
+
+/* LIENS */
+footer a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffffff;
+    transform: scale(1.05); /* Effet léger au survol */
+}
+
+/* PARAGRAPHES ET TEXTES */
+footer p {
+    color: #bdc3c7;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* ICONES FONT-AWESOME */
+footer i {
+    color: #27ae60;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+/* MISE EN AVANT DE L'UNIVERSITÉ */
+.footer-right strong {
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* OPTIONNEL : Copyright en bas de page si vous voulez le sortir du grid */
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}

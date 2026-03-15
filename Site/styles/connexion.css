@@ -1,0 +1,243 @@
+/* ============================================================
+   STYLE UNIFIÉ - CONNEXION & NOUVEAU (CORRIGÉ)
+============================================================ */
+
+/* Reset de base pour éviter les calculs de taille erronés */
+* {
+    box-sizing: border-box;
+}
+
+/* Page et Conteneur */
+.connexion-page, .inscription-page {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8faf9;
+    padding: 40px 20px;
+}
+
+.connexion-container, .inscription-container {
+    width: 100%;
+    max-width: 450px; /* Taille par défaut connexion */
+}
+
+/* Largeur adaptée pour le formulaire d'inscription plus riche */
+.inscription-container {
+    max-width: 750px; 
+}
+
+/* En-têtes */
+.connexion-header, .inscription-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.connexion-header h1, .inscription-header h1 { 
+    color: #2c3e50; 
+    font-size: 2rem; 
+    margin-bottom: 10px;
+}
+.connexion-header p, .inscription-header p { color: #7f8c8d; }
+
+/* La Carte */
+.form-card {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    height: auto; /* Laisse le contenu définir la hauteur */
+}
+
+/* --- Grille et Sections (Nouveau.php) --- */
+.form-section {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.form-section:last-of-type {
+    border-bottom: none;
+}
+.form-section h3 {
+    font-size: 1.1rem;
+    color: #27ae60;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px; /* Espace entre les colonnes */
+}
+
+/* Groupes et Inputs */
+.form-group { 
+    margin-bottom: 20px; 
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+.form-group label { 
+    display: block; 
+    margin-bottom: 8px; 
+    font-weight: 600; 
+    color: #2c3e50; 
+    font-size: 0.9rem;
+}
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.2s;
+}
+.form-group input:focus { 
+    border-color: #27ae60; 
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+}
+
+/* Messages d'erreur sous les inputs */
+.msg {
+    min-height: 18px;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+.error-msg-inline { 
+    color: #c0392b; 
+}
+input.error { 
+    border-color: #c0392b !important; 
+    background-color: #fff9f9; 
+}
+
+/* Boutons */
+.btn-primary, .btn-submit {
+    width: 100%;
+    padding: 14px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+    margin-top: 10px;
+}
+.btn-primary:hover, .btn-submit:hover { 
+    background: #1e8449; 
+}
+
+/* Footer de la carte (Lien connexion/inscription) */
+.form-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #7f8c8d;
+}
+.form-footer a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Alertes AJAX (Haut ou bas de formulaire) */
+.form-message { 
+    margin-bottom: 20px; 
+    padding: 12px; 
+    border-radius: 8px; 
+    display: none; 
+    text-align: center; 
+    font-weight: 500;
+}
+.error-msg { 
+    background: #fdeaea; 
+    color: #c0392b; 
+    border: 1px solid #f5c6cb;
+}
+.success-msg { 
+    background: #eafaf1; 
+    color: #27ae60; 
+    border: 1px solid #d4edda;
+}
+
+/* Spécificités Connexion (Pour ne pas casser connexion.php) */
+.forgot-password {
+    display: block;
+    text-align: right;
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin: -10px 0 20px 0;
+    text-decoration: none;
+}
+.form-divider {
+    text-align: center;
+    margin: 25px 0;
+    border-top: 1px solid #eee;
+    position: relative;
+}
+.form-divider span {
+    background: white;
+    padding: 0 15px;
+    position: relative;
+    top: -12px;
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+/* Bouton secondaire (Créer une exploitation) */
+.btn-secondary {
+    display: block;
+    text-align: center;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: #27ae60;
+    border: 2px solid #27ae60; /* Contour vert */
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background: #27ae60;
+    color: white; /* S'inverse au survol */
+}
+
+/* Style pour le séparateur "Nouveau sur la plateforme ?" */
+.form-divider {
+    text-align: center;
+    margin: 25px 0 15px 0;
+    border-top: 1px solid #eee;
+    position: relative;
+}
+
+.form-divider span {
+    background: white;
+    padding: 0 15px;
+    position: relative;
+    top: -12px;
+    color: #95a5a6;
+    font-size: 0.85rem;
+}
+/* Responsive */
+@media (max-width: 600px) {
+    .form-grid { 
+        grid-template-columns: 1fr; 
+        gap: 0;
+    }
+    .inscription-container {
+        max-width: 100%;
+    }
+    .form-card {
+        padding: 25px 20px;
+    }
+}

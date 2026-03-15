@@ -1,0 +1,188 @@
+/* ============================================================
+   MON_COMPTE.CSS - AGRI PREDICT (CORRIGÉ)
+============================================================ */
+
+/* Reset local pour garantir que le padding ne casse pas la grille */
+.account-page *, .account-page *::before, .account-page *::after {
+    box-sizing: border-box;
+}
+
+/* --- Mise en page globale --- */
+.account-page {
+    padding: 60px 20px;
+    background: #f8faf9;
+    min-height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+}
+
+.account-container {
+    width: 100%;
+    max-width: 750px;
+}
+
+/* --- Titres & En-tête --- */
+.account-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.account-header h1 { 
+    color: #2c3e50; 
+    font-size: 2.4rem; 
+    margin-bottom: 10px; 
+}
+.account-header p { 
+    color: #7f8c8d; 
+}
+
+.section-title {
+    text-align: center;
+    color: #27ae60;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #27ae60;
+    border-radius: 2px;
+}
+
+/* --- Cartes (Containers) --- */
+.account-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    border: 1px solid #eee;
+    height: auto; /* Empêche les hauteurs fixes qui causent les superpositions */
+}
+
+/* --- GRILLE - ANTI SUPERPOSITION --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes égales */
+    gap: 25px; /* Espace constant entre les cases */
+    align-items: start;
+}
+
+.full-width {
+    grid-column: span 2; /* Prend les deux colonnes */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.95rem;
+}
+
+.form-group input {
+    width: 100%; /* S'adapte à la colonne de la grille */
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+/* --- HOVERS --- */
+.form-group input:focus {
+    border-color: #27ae60;
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
+    transform: translateY(-2px); /* Petit effet de levée cohérent */
+}
+
+.hint {
+    font-weight: normal;
+    font-size: 0.8rem;
+    color: #95a5a6;
+    margin-left: 5px;
+}
+
+/* --- Bouton Enregistrer --- */
+.btn-save {
+    width: 100%;
+    padding: 16px;
+    background: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-save:hover {
+    background: #1e8449;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* --- Section Suppression --- */
+.delete-card {
+    text-align: center;
+    background: #fffdfd;
+    border: 1px dashed #fab1a0;
+}
+
+.link-delete {
+    display: inline-block;
+    margin-top: 10px;
+    color: #d63031;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.link-delete:hover {
+    color: #ff7675;
+    text-decoration: underline;
+}
+
+/* --- Footer & Alertes --- */
+.account-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-back {
+    color: #7f8c8d;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    color: #27ae60;
+}
+
+.alert-success {
+    background: #eafaf1;
+    color: #27ae60;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid #d4edda;
+}
