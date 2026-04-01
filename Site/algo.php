@@ -140,7 +140,7 @@ model = Sequential([
 ])
 
 model.compile(optimizer='adam', loss='mse')
-print("🚀 Entraînement en cours (12 variables en entrée)...")
+print("Entraînement en cours (12 variables en entrée)...")
 model.fit(X_train, y_train, epochs=15, batch_size=64, validation_split=0.1, verbose=1)
 
 # =========================================================
@@ -159,7 +159,7 @@ final_forecast = pred_residue + np.array(future_normales)
 df_res = pd.DataFrame({'ds': future_dates, 'y_pred': final_forecast})
 df_res.to_csv("forecast_lstm_24h.csv", index=False)
 model.save("modele_montpellier_final.keras")
-print("✅ Modèle sauvegardé. Prédictions → 'forecast_lstm_24h.csv'")
+print("Modèle sauvegardé. Prédictions → 'forecast_lstm_24h.csv'")
                     </code></pre>
                 </div>
             </div>
@@ -224,7 +224,7 @@ final_model = SARIMAX(
 )
 
 final_fit = final_model.fit(disp=False)
-print("✅ Modèle entraîné avec succès !")
+print("Modèle entraîné avec succès !")
 
 # =========================================================
 # 3. PRÉDICTION (12 mois suivants)
