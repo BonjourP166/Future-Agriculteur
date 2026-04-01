@@ -8,10 +8,10 @@
 
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="/Agri/Future-Agriculteur/Site/index.php">Accueil</a></li>
-                <li><a href="/Agri/Future-Agriculteur/Site/planificateur.php">Planificateur</a></li>
-                <li><a href="/Agri/Future-Agriculteur/Site/algo.php">Algorithmes utilisés</a></li>
-                <li><a href="/Agri/Future-Agriculteur/Site/visu_stat.php">Analyse exploratoire</a></li>
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="planificateur.php">Planificateur</a></li>
+                <li><a href="algo.php">Algorithmes utilisés</a></li>
+                <li><a href="visu_stat.php">Analyse exploratoire</a></li>
             </ul>
         </nav>
 
