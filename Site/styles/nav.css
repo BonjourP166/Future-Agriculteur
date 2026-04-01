@@ -108,3 +108,49 @@ header {
     background-color: #1e8449;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+@media (max-width: 900px) {
+    .nav-links {
+        gap: 16px;
+    }
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+    .logo a {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 700px) {
+    header {
+        height: auto;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+    }
+    .header-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .logo {
+        flex: 1 1 auto;
+    }
+    .nav-links {
+        order: 3;           /* Passe sous le logo et les boutons */
+        width: 100%;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 8px 0 4px;
+        border-top: 1px solid #e0e0e0;
+    }
+    .nav-links a {
+        font-size: 0.85rem;
+    }
+    .header-auth {
+        gap: 8px;
+    }
+    .btn-account,
+    .btn-login {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+}

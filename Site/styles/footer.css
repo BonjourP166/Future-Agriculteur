@@ -99,3 +99,25 @@ footer i {
     font-size: 0.8rem;
     color: #7f8c8d;
 }
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+    }
+    .footer-right {
+        grid-column: 1 / -1;  /* Prend toute la largeur sur la dernière ligne */
+    }
+}
+
+@media (max-width: 560px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    .footer-right {
+        grid-column: auto;
+    }
+    footer {
+        padding: 40px 0 28px;
+    }
+}
