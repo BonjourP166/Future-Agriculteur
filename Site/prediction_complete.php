@@ -9,6 +9,7 @@ header('Content-Type: application/json; charset=utf-8');
 // ============================
 $cp = $_GET['cp'] ?? '';
 $horizon = $_GET['horizon'] ?? '';
+$targetDate = $_GET['target_date'] ?? '';
 
 $cp = trim($cp);
 $horizon = trim($horizon);

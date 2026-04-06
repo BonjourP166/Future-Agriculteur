@@ -438,7 +438,7 @@ $cultures = $req->fetchAll(PDO::FETCH_ASSOC);
 
 <section class="presentation-cultures">
             <div class="container">
-                <h2>Liste de toutes nos cultures, cliquez dessus pour avoir plus de détails</h2>
+                <h2>Liste de toutes nos cultures</h2> <p>Cliquez dessus pour avoir plus de détails</p>
                 <?php echo "<br><br>"; ?>
 
                 <label for="typeFilter">Filtrer par type :</label>
