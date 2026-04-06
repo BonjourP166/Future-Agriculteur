@@ -18,9 +18,7 @@ $horizon = trim($horizon);
 $targetDate = trim($targetDate);
 
 if ($cp === '' || $horizon === '') {
-    echo json_encode([
-        "error" => "Les paramètres cp et horizon sont requis."
-    ]);
+    echo json_encode(["error" => "Les paramètres cp et horizon sont requis."]);
     exit;
 }
 
@@ -28,16 +26,26 @@ if ($targetDate === '') {
     $targetDate = date('Y-m-d');
 }
 
+// Fonction utilitaire pour appeler une URL via cURL (plus fiable que file_get_contents)
+function call_url($url) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return $result;
+}
+
 // ============================
 // 2. RÉCUPÉRER LA STATION PROCHE
 // ============================
-$urlStation = "http://localhost/agri/get_station_proche.php?cp=" . urlencode($cp);
-$responseStation = file_get_contents($urlStation);
+// On utilise 127.0.0.1 au lieu de localhost pour éviter les lenteurs DNS sur Mac
+$urlStation = "http://127.0.0.1:8888/Agri/Future-Agriculteur/Site/get_station_proche.php?cp=" . urlencode($cp);
+$responseStation = call_url($urlStation);
 
 if ($responseStation === false) {
-    echo json_encode([
-        "error" => "Impossible d'appeler get_station_proche.php"
-    ]);
+    echo json_encode(["error" => "Impossible d'appeler get_station_proche.php"]);
     exit;
 }
 
@@ -60,12 +68,10 @@ $urlApi = "http://127.0.0.1:5000/predict?station=" . urlencode($station)
     . "&horizon=" . urlencode($horizon)
     . "&target_date=" . urlencode($targetDate);
 
-$responseApi = file_get_contents($urlApi);
+$responseApi = call_url($urlApi);
 
 if ($responseApi === false) {
-    echo json_encode([
-        "error" => "Impossible d'appeler l'API Python"
-    ]);
+    echo json_encode(["error" => "Impossible d'appeler l'API Python"]);
     exit;
 }
 
@@ -82,6 +88,7 @@ if (isset($dataApi["error"])) {
 // ============================
 // 4. EXTRAIRE LA TEMPÉRATURE PRÉDITE
 // ============================
+$tempPredite = null;
 if (isset($dataApi["temperature_predite"])) {
     $tempPredite = floatval($dataApi["temperature_predite"]);
 } elseif (isset($dataApi[0]["temperature_predite"])) {
@@ -101,28 +108,33 @@ $datePrediction = $dataApi["target_date"] ?? $targetDate;
 $moisPred = intval(date('n', strtotime($datePrediction)));
 
 // ============================
-// 6. RÉCUPÉRER LES CULTURES
+// 6. RÉCUPÉRER LES CULTURES (Base de données)
 // ============================
-$sqlCultures = "
-    SELECT
-        c.id_culture,
-        c.nom_culture,
-        c.type_culture,
-        ct.t_min_germination,
-        ct.t_opt_germination,
-        ct.t_ideale_croissance,
-        ct.t_min_croissance,
-        s.mois_semis,
-        s.mois_recolte,
-        s.saison,
-        s.remarque
-    FROM culture c
-    JOIN contrainte_temperature ct ON c.id_culture = ct.id_culture
-    JOIN saisonnalite s ON c.id_culture = s.id_culture
-";
+try {
+    $sqlCultures = "
+        SELECT
+            c.id_culture,
+            c.nom_culture,
+            c.type_culture,
+            ct.t_min_germination,
+            ct.t_opt_germination,
+            ct.t_ideale_croissance,
+            ct.t_min_croissance,
+            s.mois_semis,
+            s.mois_recolte,
+            s.saison,
+            s.remarque
+        FROM culture c
+        JOIN contrainte_temperature ct ON c.id_culture = ct.id_culture
+        JOIN saisonnalite s ON c.id_culture = s.id_culture
+    ";
 
-$stmtCultures = $bdd->query($sqlCultures);
-$cultures = $stmtCultures->fetchAll(PDO::FETCH_ASSOC);
+    $stmtCultures = $bdd->query($sqlCultures);
+    $cultures = $stmtCultures->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    echo json_encode(["error" => "Erreur SQL : " . $e->getMessage()]);
+    exit;
+}
 
 // ============================
 // 7. FILTRER LES CULTURES
@@ -134,6 +146,7 @@ foreach ($cultures as $culture) {
     $tempMin = floatval($culture['t_min_croissance']);
     $tempMax = floatval($culture['t_ideale_croissance']);
 
+    // Logique de recommandation
     $tempOk = ($tempPredite >= $tempMin && $tempPredite <= $tempMax);
 
     $moisDebut = intval($culture['mois_semis']);

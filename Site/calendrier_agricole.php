@@ -6,8 +6,12 @@ $cp = trim($cp);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Calendrier Agricole</title>
+    <title>Planning Agricole - Algorithmes ML</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/nav.css">
+    <link rel="stylesheet" href="styles/algo.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
@@ -291,9 +295,21 @@ $cp = trim($cp);
                 grid-template-columns: 1fr;
             }
         }
+        #titre_hero{
+            color: white;
+        }
     </style>
 </head>
 <body>
+    <?php include 'nav.php'; ?>
+     <section class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h1 id="titre_hero">Prédiction de la temperature</h1>
+                <p>Prédisez ci-dessous la temperature sur le court, moyen ou long terme</p>
+            </div>
+        </section>
+        <section class="presentation-section">
 <div class="page">
     <div class="card">
         <div class="topbar">
@@ -380,7 +396,8 @@ $cp = trim($cp);
         <div class="modal-body" id="modalBody"></div>
     </div>
 </div>
-
+</section>
+ <?php include 'footer.php'; ?>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');

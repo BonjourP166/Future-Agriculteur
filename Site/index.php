@@ -24,7 +24,7 @@ session_start();
             <div class="hero-content">
                 <h1>Planificateur Agricole Intelligent</h1>
                 <p>Optimisez vos cycles de plantation grâce au Machine Learning et aux données géoclimatiques de votre région.</p>
-                <a href="planificateur.php" class="btn-hero">Générer mon planning</a>            </div>
+                <a href="calendrier_agricole.php" class="btn-hero">Générer mon planning</a>            </div>
         </section>
 
         <section class="presentation-section">
@@ -61,7 +61,7 @@ session_start();
                 <div class="presentation-cta">
                     <h3>Prêt à transformer votre exploitation ?</h3>
                     <p>Utilisez notre algorithme pour anticiper les récoltes de demain.</p>
-                    <a href="planificateur.php" class="btn-principal">Générer mon planning</a>                </div>
+                    <a href="calendrier_agricole.php" class="btn-principal">Générer mon planning</a>                </div>
 
             </div>
         </section>

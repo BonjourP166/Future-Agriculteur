@@ -27,7 +27,7 @@ if ($targetDate === '') {
     $targetDate = $start !== '' ? date('Y-m-d', strtotime($start)) : date('Y-m-d');
 }
 
-$url = "http://localhost/agri/prediction_cultures.php?cp=" . urlencode($cp)
+$url = "http://localhost:8888/Agri/Future-Agriculteur/Site/prediction_cultures.php?cp=" . urlencode($cp)
     . "&horizon=" . urlencode($horizon)
     . "&target_date=" . urlencode($targetDate);
 

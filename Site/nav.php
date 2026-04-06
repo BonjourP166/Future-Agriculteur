@@ -9,21 +9,13 @@
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="index.php">Accueil</a></li>
-                <li><a href="prediction.php">Planificateur</a></li>
                 <li><a href="algo.php">Algorithmes utilisés</a></li>
                 <li><a href="visu_stat.php">Analyse exploratoire</a></li>
             </ul>
         </nav>
 
         <div class="header-auth">
-            <?php if (isset($_SESSION['agriculteur'])): ?>
-                <a href="/Agri/Future-Agriculteur/Site/connexion/mon_compte.php" class="btn-account">
-    <i class="fas fa-user-circle"></i> Mon Compte
-</a>
-                <a href="/Agri/Future-Agriculteur/Site/connexion/deconnexion.php" class="btn-login">Déconnexion</a>
-            <?php else: ?>
-                <a href="/Agri/Future-Agriculteur/Site/connexion/connexion.php" class="btn-login">Connexion</a>
-            <?php endif; ?>
+                <a href="calendrier_agricole.php"  class="btn-login">Planificateur</a>
         </div>
     </div>
 </header>

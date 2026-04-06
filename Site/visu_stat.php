@@ -245,7 +245,16 @@ while($row = $res_sols->fetch(PDO::FETCH_ASSOC)) {
     ];
 }
 $js_sols_data = json_encode($sols_data);
+
+$sqlCulture = "SELECT id_culture, nom_culture, type_culture FROM culture ORDER BY type_culture, nom_culture";
+$req = $bdd->prepare($sqlCulture);
+$req->execute();
+$cultures = $req->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -256,6 +265,8 @@ $js_sols_data = json_encode($sols_data);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <link rel="stylesheet" href="styles/nav.css">
 <link rel="stylesheet" href="styles/visu.css">
+<link rel="stylesheet" href="styles/visu_2.css">
+<link rel="stylesheet" href="styles/footer.css">
 </head>
 <body>
 <?php include 'nav.php'; ?>
@@ -425,6 +436,40 @@ $js_sols_data = json_encode($sols_data);
 
 </div></div>
 
+<section class="presentation-cultures">
+            <div class="container">
+                <h2>Liste de toutes nos cultures, cliquez dessus pour avoir plus de détails</h2>
+                <?php echo "<br><br>"; ?>
+
+                <label for="typeFilter">Filtrer par type :</label>
+                <select id="typeFilter" onchange="filterCultures()">
+                    <option value="all">Tous</option>
+                    <option value="fruit">Fruits</option>
+                    <option value="légume">Légumes</option>
+                </select>
+
+                <?php echo "<br><br>"; ?>
+
+                <?php foreach ($cultures as $culture): ?>
+                    <div class="culture-box" 
+                        data-type="<?= strtolower($culture['type_culture']) ?>"
+                        onclick="openModal(<?= $culture['id_culture'] ?>)">
+                        <?= htmlspecialchars($culture['nom_culture']) ?>
+                    </div>
+                <?php endforeach; ?>
+
+                <!-- Modal -->
+                <div id="cultureModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeModal()">&times;</span>
+                        <div id="modal-body"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<?php include 'footer.php'; ?>      
 <script>
 const MOIS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const SAISONS = ['Printemps','Été','Automne','Hiver'];
@@ -644,7 +689,47 @@ new Chart(document.getElementById('chartSolCluster'), {
     data:{ datasets:[ { label:'Sableux', data:sols0, backgroundColor:'rgba(230,126,34,0.7)' }, { label:'Intermédiaire', data:sols1, backgroundColor:'rgba(52,152,219,0.7)' }, { label:'Argileux', data:sols2, backgroundColor:'rgba(39,174,96,0.7)' } ] }, 
     options:{ ...baseOptions, plugins:{ tooltip:{ callbacks:{ label: ctx => `${ctx.raw.label} (Sable: ${ctx.raw.x}%, Argile: ${ctx.raw.y}%)` } } }, scales:{ x:{ min:0, max:100, title:{display:true,text:'% Sable'} }, y:{ min:0, max:60, title:{display:true,text:'% Argile'} } } } 
 });
+ function openModal(cultureId) {
+            if (!cultureId || cultureId <= 0) {
+                alert("ID de culture invalide !");
+                return;
+            }
 
+            fetch('visu_base.php?id=' + cultureId)
+                .then(resp => resp.text())
+                .then(html => {
+                    document.getElementById('modal-body').innerHTML = html;
+                    document.getElementById('cultureModal').style.display = 'block';
+                })
+                .catch(err => {
+                    document.getElementById('modal-body').innerHTML = "<p style='color:red;'>Erreur lors du chargement.</p>";
+                    document.getElementById('cultureModal').style.display = 'block';
+                    console.error(err);
+                });
+        }
+
+        function closeModal() {
+            document.getElementById('cultureModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('cultureModal')) {
+                closeModal();
+            }
+        }
+        function filterCultures() {
+        const filter = document.getElementById('typeFilter').value;
+        const boxes = document.querySelectorAll('.culture-box');
+
+        boxes.forEach(box => {
+            const type = box.getAttribute('data-type');
+            if (filter === 'all' || type === filter) {
+                box.style.display = 'inline-block';
+            } else {
+                box.style.display = 'none';
+            }
+        });
+        }
 </script>
 </body>
 </html>
