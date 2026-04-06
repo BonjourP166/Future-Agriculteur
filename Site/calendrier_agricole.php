@@ -398,6 +398,7 @@ $cp = trim($cp);
 </div>
 </section>
  <?php include 'footer.php'; ?>
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('calendar');
@@ -417,16 +418,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalBody = document.getElementById('modalBody');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
 
-    let currentHorizon = 'monthly';
     let latestDetails = null;
 
-    function showLoading() {
-        loadingBox.style.display = 'block';
-    }
-
-    function hideLoading() {
-        loadingBox.style.display = 'none';
-    }
+    function showLoading() { loadingBox.style.display = 'block'; }
+    function hideLoading() { loadingBox.style.display = 'none'; }
 
     function updateSummary(meta) {
         summaryStation.textContent = meta.station || '—';
@@ -434,7 +429,6 @@ document.addEventListener('DOMContentLoaded', function () {
             ? `${meta.temperature_predite}°C`
             : '—';
         summaryHorizon.textContent = meta.horizon || '—';
-        summaryCount.textContent = meta.cultures_count ?? 0;
     }
 
     function renderRecommendedList(cultures) {
@@ -442,12 +436,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!cultures || cultures.length === 0) {
             emptyState.style.display = 'block';
+            summaryCount.textContent = "0";
             return;
         }
 
         emptyState.style.display = 'none';
 
+        const culturesUniques = [];
+        const nomsVus = new Set();
+
         cultures.forEach(culture => {
+            if (!nomsVus.has(culture.nom_culture)) {
+                nomsVus.add(culture.nom_culture);
+                culturesUniques.push(culture);
+            }
+        });
+
+        summaryCount.textContent = culturesUniques.length;
+
+        culturesUniques.forEach(culture => {
             const card = document.createElement('div');
             card.className = 'culture-card';
 
@@ -459,7 +466,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     <strong>Remarque :</strong> ${culture.remarque ? culture.remarque : 'Aucune'}
                 </div>
             `;
-
             recommendedList.appendChild(card);
         });
     }
@@ -470,9 +476,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalOverlay.style.display = 'flex';
     }
 
-    function closeModal() {
-        modalOverlay.style.display = 'none';
-    }
+    function closeModal() { modalOverlay.style.display = 'none'; }
 
     modalCloseBtn.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', function(e) {
@@ -485,10 +489,14 @@ document.addEventListener('DOMContentLoaded', function () {
         firstDay: 1,
         height: 'auto',
 
+        // -----------------------------------------------------------
+        // 1. SUPPRESSION DES VUES "HEURE PAR HEURE"
+        // On remplace 'timeGridWeek' et 'timeGridDay' par 'dayGridWeek' et 'dayGridDay'
+        // -----------------------------------------------------------
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            right: 'dayGridMonth,dayGridWeek,dayGridDay,listMonth'
         },
 
         buttonText: {
@@ -500,14 +508,6 @@ document.addEventListener('DOMContentLoaded', function () {
         },
 
         datesSet: function(info) {
-            if (info.view.type === 'timeGridDay') {
-                currentHorizon = 'journalier';
-            } else if (info.view.type === 'timeGridWeek') {
-                currentHorizon = 'weekly';
-            } else {
-                currentHorizon = 'monthly';
-            }
-
             const startText = info.startStr.substring(0, 10);
             const endText = info.endStr.substring(0, 10);
             periodBox.innerHTML = `Période affichée : <strong>${startText}</strong> → <strong>${endText}</strong>`;
@@ -515,12 +515,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         events: function(fetchInfo, successCallback, failureCallback) {
             if (!cp) {
-                updateSummary({
-                    station: '—',
-                    temperature_predite: null,
-                    horizon: '—',
-                    cultures_count: 0
-                });
+                updateSummary({ station: '—', temperature_predite: null, horizon: '—' });
                 renderRecommendedList([]);
                 successCallback([]);
                 return;
@@ -528,10 +523,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
             showLoading();
 
+            // -----------------------------------------------------------
+            // 2. DETECTION INFAILLIBLE DE L'HORIZON PAR LES MATHÉMATIQUES
+            // On calcule la vraie différence de jours affichés à l'écran
+            // -----------------------------------------------------------
+            const diffJours = Math.round((fetchInfo.end - fetchInfo.start) / (1000 * 60 * 60 * 24));
+            
+            let fetchHorizon = 'monthly'; // Par défaut
+
+            // Si le calendrier affiche exactement 1 jour
+            if (diffJours === 1) {
+                fetchHorizon = 'journalier';
+            } 
+            // Si le calendrier affiche 7 jours
+            else if (diffJours === 7) {
+                fetchHorizon = 'weekly';
+            } 
+            // Sinon (35 ou 42 jours pour la vue Mois)
+            else {
+                fetchHorizon = 'monthly';
+            }
+
             const targetDate = fetchInfo.startStr.substring(0, 10);
 
             const url = `events_agricoles.php?cp=${encodeURIComponent(cp)}`
-                + `&horizon=${encodeURIComponent(currentHorizon)}`
+                + `&horizon=${encodeURIComponent(fetchHorizon)}`
                 + `&start=${encodeURIComponent(fetchInfo.startStr)}`
                 + `&end=${encodeURIComponent(fetchInfo.endStr)}`
                 + `&target_date=${encodeURIComponent(targetDate)}`;
@@ -543,12 +559,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (data.error) {
                         console.error("Erreur events_agricoles.php :", data.error);
-                        updateSummary({
-                            station: 'Erreur',
-                            temperature_predite: null,
-                            horizon: currentHorizon,
-                            cultures_count: 0
-                        });
+                        updateSummary({ station: 'Erreur', temperature_predite: null, horizon: fetchHorizon });
                         renderRecommendedList([]);
                         successCallback([]);
                         return;
@@ -560,31 +571,32 @@ document.addEventListener('DOMContentLoaded', function () {
                         updateSummary({
                             station: latestDetails.station,
                             temperature_predite: latestDetails.temperature_predite,
-                            horizon: latestDetails.horizon,
-                            cultures_count: latestDetails.cultures_count
+                            horizon: fetchHorizon
                         });
                         renderRecommendedList(latestDetails.cultures_recommandees || []);
                     } else {
-                        updateSummary({
-                            station: '—',
-                            temperature_predite: null,
-                            horizon: currentHorizon,
-                            cultures_count: 0
-                        });
+                        updateSummary({ station: '—', temperature_predite: null, horizon: fetchHorizon });
                         renderRecommendedList([]);
                     }
 
-                    successCallback(data.events || []);
+                    const rawEvents = data.events || [];
+                    const uniqueEvents = [];
+                    const eventTitlesSeen = new Set();
+
+                    rawEvents.forEach(evt => {
+                        const key = evt.title + evt.start; 
+                        if (!eventTitlesSeen.has(key)) {
+                            eventTitlesSeen.add(key);
+                            uniqueEvents.push(evt);
+                        }
+                    });
+
+                    successCallback(uniqueEvents);
                 })
                 .catch(error => {
                     hideLoading();
                     console.error("Erreur calendrier :", error);
-                    updateSummary({
-                        station: 'Erreur',
-                        temperature_predite: null,
-                        horizon: currentHorizon,
-                        cultures_count: 0
-                    });
+                    updateSummary({ station: 'Erreur', temperature_predite: null, horizon: fetchHorizon });
                     renderRecommendedList([]);
                     failureCallback(error);
                 });

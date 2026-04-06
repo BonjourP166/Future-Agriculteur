@@ -27,15 +27,21 @@ if ($targetDate === '') {
     $targetDate = $start !== '' ? date('Y-m-d', strtotime($start)) : date('Y-m-d');
 }
 
-$url = "http://localhost:8888/Agri/Future-Agriculteur/Site/prediction_cultures.php?cp=" . urlencode($cp)
+$url = "http://127.0.0.1:8888/Agri/Future-Agriculteur/Site/prediction_cultures.php?cp=" . urlencode($cp)
     . "&horizon=" . urlencode($horizon)
     . "&target_date=" . urlencode($targetDate);
 
-$response = file_get_contents($url);
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+curl_close($ch);
 
-if ($response === false) {
+if ($response === false || $httpCode !== 200) {
     echo json_encode([
-        "error" => "Impossible d'appeler prediction_cultures.php"
+        "error" => "Impossible d'appeler prediction_cultures.php (Code $httpCode)"
     ]);
     exit;
 }
