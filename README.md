@@ -8,6 +8,7 @@ Ce répertoire contient l’ensemble des éléments nécessaires au projet :
 - un dossier contenant les pages du site web (PHP, HTML, CSS)(Site)
 - un dossier contenant des modèles de prédiction développés (modèles)
 - les schémas de la base de données (MCD et MOD)(MODMCD)
+- le powerpoint de notre présentation(Présentation_agriculture.pdf)
 - un script permettant de télécharger et/ou charger l’ensemble des modèles de prédiction(modèles/code_telechargement_model_prediction.ipynb)
 L’organisation du dépôt permet de retrouver facilement chaque composant du projet : données, analyses, modèles et applications web.
 
