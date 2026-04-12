@@ -57,17 +57,132 @@ Le site peut être :
 ## Structure du projet
 ### Site web
 (dans le dossier Site)
-- index.php
+
+
 - algo.php
+- api_prediction.py
+- bd.php
 - calendrier_agricole.php
 - events_agricoles.php
-- prediction_culture.php
-- get_station_proche.php
-- api_prediction.py
-- visu_stat.php
-- bd.php 
 - footer.php
+- get_station_proche.php
+- index.php
 - nav.php
+- prediction_complete.php
+- prediction_cultures.php
+- requirements.txt
+- synop_2022.csv
+- synop_2023.csv
+- synop_2024.csv
+- synop_2025.csv
+- synop_2026.csv
+- test.php
+- train_lstm.py
+- train_sarima.py
+- visu_base.php
+- visu_stat.php
+
+modele_lstm.keras:
+- BORDEAUX-MERIGNAC_lstm_24h.keras
+- BREST-GUIPAVAS_lstm_24h.keras
+- LILLE-LESQUIN_lstm_24h.keras
+- LYON-ST_EXUPERY_lstm_24h.keras
+- MONTPELLIER-AEROPORT_lstm_24h.keras
+- NANTES-BOUGUENAIS_lstm_24h.keras
+- NICE_lstm_24h.keras
+- PERPIGNAN_lstm_24h.keras
+- STRASBOURG-ENTZHEIM_lstm_24h.keras
+- TOULOUSE-BLAGNAC_lstm_24h.keras
+
+models_sarima_monthly:
+- .venv: (cest un dossier tecnique)
+
+- models_sarima_monthly:
+- - sarima_monthly_BORDEAUX_MERIGNAC.pkl
+- - sarima_monthly_BREST_GUIPAVAS.pkl
+- - sarima_monthly_LILLE_LESQUIN.pkl
+- - sarima_monthly_LYON_ST_EXUPERY.pkl
+- -  sarima_monthly_MONTPELLIER_AEROPORT.pkl
+- - sarima_monthly_NANTES_BOUGUENAIS.pkl
+- - sarima_monthly_NICE.pkl
+- - sarima_monthly_PERPIGNAN.pkl
+- - sarima_monthly_STRASBOURG_ENTZHEIM.pkl
+- - sarima_monthly_TOULOUSE_BLAGNAC.pkl
+ 
+
+
+- sarima_monthly_BORDEAUX_MERIGNAC.pkl
+- sarima_monthly_BREST_GUIPAVAS.pkl
+- sarima_monthly_LILLE_LESQUIN.pkl
+- sarima_monthly_LYON_ST_EXUPERY.pkl
+- sarima_monthly_MONTPELLIER_AEROPORT.pkl
+- sarima_monthly_NANTES_BOUGUENAIS.pkl
+- sarima_monthly_NICE.pkl
+- sarima_monthly_PERPIGNAN.pkl
+- sarima_monthly_STRASBOURG_ENTZHEIM.pkl
+- sarima_monthly_TOULOUSE_BLAGNAC.pkl
+
+
+models_sarima_weekly:
+- sarima_weekly_BORDEAUX_MERIGNAC.pkl
+- sarima_weekly_BREST_GUIPAVAS.pkl
+- sarima_weekly_LILLE_LESQUIN.pkl
+- sarima_weekly_LYON_ST_EXUPERY.pkl
+- sarima_weekly_MONTPELLIER_AEROPORT.pkl
+- sarima_weekly_NANTES_BOUGUENAIS.pkl
+- sarima_weekly_NICE.pkl
+- sarima_weekly_PERPIGNAN.pkl
+- sarima_weekly_STRASBOURG_ENTZHEIM.pkl
+- sarima_weekly_TOULOUSE_BLAGNAC.pkl
+
+normales_map_lstm.pkl:
+- BORDEAUX-MERIGNAC_normales_map.pkl
+- BREST-GUIPAVAS_normales_map.pkl
+- LILLE-LESQUIN_normales_map.pkl
+- LYON-ST_EXUPERY_normales_map.pkl
+- MONTPELLIER-AEROPORT_normales_map.pkl
+- NANTES-BOUGUENAIS_normales_map.pkl
+- NICE_normales_map.pkl
+- PERPIGNAN_normales_map.pkl
+- STRASBOURG-ENTZHEIM_normales_map.pkl
+- TOULOUSE-BLAGNAC_normales_map.pkl
+
+scaler_x_lstm.pkl:
+- BORDEAUX-MERIGNAC_scaler_X.pkl
+- BREST-GUIPAVAS_scaler_X.pkl
+- LILLE-LESQUIN_scaler_X.pkl
+- LYON-ST_EXUPERY_scaler_X.pkl
+- MONTPELLIER-AEROPORT_scaler_X.pkl
+- NANTES-BOUGUENAIS_scaler_X.pkl
+- NICE_scaler_X.pkl
+- PERPIGNAN_scaler_X.pkl
+- STRASBOURG-ENTZHEIM_scaler_X.pkl
+- TOULOUSE-BLAGNAC_scaler_X.pkl
+
+scaler_y_lstm.pkl:
+- BORDEAUX-MERIGNAC_scaler_y.pkl
+- BREST-GUIPAVAS_scaler_y.pkl
+- LILLE-LESQUIN_scaler_y.pkl
+- LYON-ST_EXUPERY_scaler_y.pkl
+- MONTPELLIER-AEROPORT_scaler_y.pkl
+- NANTES-BOUGUENAIS_scaler_y.pkl
+- NICE_scaler_y.pkl
+- PERPIGNAN_scaler_y.pkl
+- STRASBOURG-ENTZHEIM_scaler_y.pkl
+- TOULOUSE-BLAGNAC_scaler_y.pkl
+
+styles:
+- algo.css
+- calendrier.css
+- connexion.css
+- footer.css
+- index.css
+- mon_compte.css
+- nav.css
+- styles.css
+- visu.css
+- visu_2.css
+
 ### Modèles
 Modèles testés :
 - Régression linéaire
